@@ -41,6 +41,14 @@ describe('ShadowBroker', () => {
     expect(b.onBar(bar(4174, 4195, 4160, 4180), 0.3)[0]!.reason).toBe('SL');
   });
 
+  it('TP bar caps MFE at the TP (excursion past the fill is not ours)', async () => {
+    const b = new ShadowBroker(profile, 100);
+    await b.open(buy, 0.01, quote(4174));
+    const [t] = b.onBar(bar(4174, 4195, 4172, 4193), 0.3);
+    expect(t).toMatchObject({ reason: 'TP', closePrice: 4190, pnl: 15.7 });
+    expect(t!.position).toMatchObject({ mae: -2.3, mfe: 15.7 });
+  });
+
   it('tracks MAE / MFE and floating equity', async () => {
     const b = new ShadowBroker(profile, 100);
     await b.open(buy, 0.01, quote(4174));

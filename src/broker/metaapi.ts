@@ -1,5 +1,5 @@
 import type { BrokerProfile } from '../config/schemas';
-import { BarBuilder } from '../feed/BarBuilder';
+import { QuoteRouter } from '../feed/QuoteRouter';
 import type { Feed, FeedHandlers, SymbolSpec } from '../feed/types';
 import type { AccountState, Bar, ClosedTrade, ExitReason, OrderIntent, Position, Quote } from '../types';
 import { dir } from '../types';
@@ -79,30 +79,15 @@ export class MetaApiSession {
 }
 
 export class MetaApiFeed implements Feed {
-  private m1 = new BarBuilder(1);
-  private m15 = new BarBuilder(15);
-  private chain: Promise<void> = Promise.resolve();
-
   constructor(private readonly s: MetaApiSession) {}
 
   async start(h: FeedHandlers) {
+    const router = new QuoteRouter(h);
     this.s.on((name, args) => {
       if (name !== 'price') return;
       const p = args[1] as { symbol: string; bid: number; ask: number; time: Date };
       if (p.symbol !== this.s.symbol) return;
-      const q: Quote = { time: new Date(p.time), bid: p.bid, ask: p.ask };
-      const spread = q.ask - q.bid;
-      const b1 = this.m1.push(q.time, q.bid, spread);
-      const b15 = this.m15.push(q.time, q.bid, spread);
-      // Ticks are processed strictly one after another (no overlapping order logic).
-      // Order matters: close bars first, then the quote that opened the new bucket.
-      this.chain = this.chain
-        .then(async () => {
-          if (b1) await h.onBar1(b1.bar, b1.spread);
-          if (b15) await h.onBar15(b15.bar);
-          await h.onQuote(q);
-        })
-        .catch((err) => log.error({ err }, 'feed handler failed'));
+      router.push({ time: new Date(p.time), bid: p.bid, ask: p.ask });
     });
   }
 

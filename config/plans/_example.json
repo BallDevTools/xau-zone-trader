@@ -1,0 +1,27 @@
+{
+  "date": "2026-10-24",
+  "createdBy": "example — copy to config/plans/YYYY-MM-DD.json",
+  "createdAt": "2026-10-24T06:58:00Z",
+  "bias": "range",
+  "refSpot": 4181.4,
+  "gcRef": 4206.1,
+  "basis": 24.7,
+  "expectedMove": 38.5,
+  "iv": 21.4,
+  "newsBlackout": [{ "start": "12:00", "end": "12:45", "title": "US CPI (manual)" }],
+  "zones": [
+    {
+      "id": "S2", "side": "SELL", "low": 4196, "high": 4200, "entry": 4198, "sl": 4206.2, "tp": [4185, 4174],
+      "trigger": "reject", "source": "Intraday volume cluster 4,222 GC"
+    },
+    {
+      "id": "B1", "side": "BUY", "low": 4171, "high": 4176, "entry": 4174, "sl": 4164.8, "tp": [4188, 4200],
+      "trigger": "reject", "source": "New OI 4,195–4,200 GC"
+    },
+    {
+      "id": "B2", "side": "BUY", "low": 4154, "high": 4160, "entry": 4157, "sl": 4148, "tp": [4171, 4185],
+      "trigger": "reject", "source": "Put OI wall 4,180 GC", "invalidIfCloseBelow": 4146
+    }
+  ],
+  "notes": "Weekly options expire today; walls matter most into the NY session."
+}

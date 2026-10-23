@@ -106,7 +106,8 @@ export class ShadowBroker implements Execution {
         closed.push(this.settle(p, this.slFill(p), end, 'SL'));
         continue;
       }
-      this.track(p, best);
+      // Excursion after the TP fill is not ours: cap the best mark at the TP.
+      this.track(p, hitTp ? p.tp : best);
       if (hitTp) closed.push(this.settle(p, p.tp, end, 'TP'));
     }
     return closed;

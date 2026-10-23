@@ -8,6 +8,7 @@
   },
   "scripts": {
     "shadow": "tsx src/main.ts --mode=shadow",
+    "shadow:mt5": "tsx src/main.ts --mode=shadow --feed=mt5",
     "live": "tsx src/main.ts --mode=live",
     "backtest": "tsx src/main.ts --mode=backtest",
     "replay": "tsx src/main.ts --mode=replay",
@@ -18,7 +19,8 @@
     "test": "vitest run",
     "web:dev": "vite --config web/vite.config.ts",
     "web:build": "vite build --config web/vite.config.ts",
-    "check": "npm run typecheck && npm test && npm run web:build"
+    "check": "npm run typecheck && npm test && npm run web:build",
+    "day:report": "tsx src/cli/dayReport.ts"
   },
   "dependencies": {
     "@fastify/static": "^10.1.7",
