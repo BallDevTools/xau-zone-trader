@@ -1,0 +1,50 @@
+{
+  "name": "xau-zone-trader",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=22.13"
+  },
+  "scripts": {
+    "shadow": "tsx src/main.ts --mode=shadow",
+    "live": "tsx src/main.ts --mode=live",
+    "backtest": "tsx src/main.ts --mode=backtest",
+    "replay": "tsx src/main.ts --mode=replay",
+    "plan:check": "tsx src/cli/planCheck.ts",
+    "golive:check": "tsx src/cli/goLiveCheck.ts",
+    "unkill": "tsx src/cli/unkill.ts",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "web:dev": "vite --config web/vite.config.ts",
+    "web:build": "vite build --config web/vite.config.ts",
+    "check": "npm run typecheck && npm test && npm run web:build"
+  },
+  "dependencies": {
+    "@fastify/static": "^10.1.7",
+    "better-sqlite3": "^13.0.3",
+    "dotenv": "^18.0.9",
+    "fastify": "^5.12.7",
+    "luxon": "^3.7.2",
+    "metaapi.cloud-sdk": "^29.3.4",
+    "pino": "^10.4.0",
+    "zod": "^4.6.7"
+  },
+  "devDependencies": {
+    "@tailwindcss/vite": "^4.3.3",
+    "@types/better-sqlite3": "^9.6.0",
+    "@types/luxon": "^3.7.6",
+    "@types/node": "^22.20.5",
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
+    "@vitejs/plugin-react": "^6.1.2",
+    "lightweight-charts": "^5.2.1",
+    "react": "^19.3.1",
+    "react-dom": "^19.3.1",
+    "tailwindcss": "^4.3.3",
+    "tsx": "^4.23.15",
+    "typescript": "^7.0.2",
+    "vite": "^8.3.5",
+    "vitest": "^5.0.5"
+  }
+}

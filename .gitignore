@@ -1,0 +1,8 @@
+node_modules/
+.env
+data/*.db*
+data/news_cache.json
+data/history/
+web/dist/
+*.log
+.DS_Store

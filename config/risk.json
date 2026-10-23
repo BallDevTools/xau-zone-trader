@@ -1,0 +1,25 @@
+{
+  "fixedLot": 0.01,
+  "maxLot": 0.01,
+  "maxSlPts": 10,
+  "minRR": 1.5,
+  "dailyLossUsd": 20,
+  "dailyMaxLosses": 2,
+  "maxTradesPerDay": 3,
+  "equityFloorUsd": 60,
+  "maxOpenPositions": 1,
+  "allowAddToLoser": false,
+  "slCooldownMin": 30,
+  "maxSpreadPts": 0.5,
+  "newsBlackoutBeforeMin": 30,
+  "newsBlackoutAfterMin": 15,
+  "noNewTradesBeforeWeekendMin": 120,
+  "flatBeforeWeekendMin": 60,
+  "shadowStartBalance": 100,
+  "goLive": {
+    "minSetups": 50,
+    "minWinRate": 0.4,
+    "minExpectancyR": 0.2,
+    "maxDrawdownR": 6
+  }
+}
